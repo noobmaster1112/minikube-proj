@@ -1,0 +1,16 @@
+[Unit]
+Description=minikube dashboard
+After=network.target docker.service
+
+[Service]
+PIDFile=/run/minikube-dashboard.pid
+ExecStartPre=/usr/local/bin/minikube start
+ExecStart=/usr/local/bin/minikube dashboard --port=8081
+Type=simple
+Restart=on-abnormal
+User=user
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=default.target

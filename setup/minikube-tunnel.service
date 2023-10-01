@@ -1,0 +1,16 @@
+[Unit]
+Description=minikube tunnel
+After=network.target docker.service minikube-dashboard.service
+
+[Service]
+PIDFile=/run/minikube-tunnel.pid
+ExecStartPre=/usr/bin/sleep 10
+ExecStart=/usr/local/bin/minikube tunnel
+Type=forking
+User=user
+Restart=on-abnormal
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=default.target
