@@ -8,7 +8,7 @@ ExecStartPre=/usr/local/bin/minikube start
 ExecStart=/usr/local/bin/minikube dashboard --port=8081
 Type=simple
 Restart=on-abnormal
-User=user
+User=<user>
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s QUIT $MAINPID
 
